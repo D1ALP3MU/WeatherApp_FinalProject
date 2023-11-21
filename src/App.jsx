@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react'
+import useWeather from './hooks/useWeather'
+import useForecast from './hooks/useForecast'
+import CardForecast from './components/CardForecast'
+import CardWeather from './components/CardWeather'
 import './App.css'
 
 // Componentizar la aplicación (por ejemplo un componente para las tarjetas del pronóstico)
@@ -8,30 +12,12 @@ import './App.css'
 
 function App() {
   const [city, setCity] = useState('')
-  const [weather, setWeather] = useState(null)
-  const [forecast, setForecast] = useState(null)
-
-  const apiKey = '80b626b94dc8c81bfd23911396d4e3dd'
-
-  //FUNCION PARA OBTENER EL CLIMA ACTUAL
-  const getWeather = () => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
-      .then((response) => response.json())
-      .then((data) => setWeather(data))
-      .catch((error) => console.log(error))
-  }
-
-  //FUNCIÓN PARA OBTENER EL PRONÓSTICO DEL CLIMA A 5 DÍAS CADA 3 HORAS
-  const getForecast = () => {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`)
-      .then((response) => response.json())
-      .then((data) => setForecast(data))
-      .catch((error) => console.log(error))
-  }
+  const [weather, getWeather] = useWeather(null)
+  const [forecast, getForecast] = useForecast(null)
 
   useEffect(() => {
     if (city) {
-      getForecast()
+      getForecast(city)
     }
   }, [city])
 
@@ -45,16 +31,12 @@ function App() {
           onBlur={(event) => setCity(event.target.value)} //onBlur es un evento que se ejecuta cuando el usuario sale del input
         />
         <button
-          onClick={getWeather}
+          onClick={() => getWeather(city)}
         >
           Search
         </button>
         {weather && (
-          <div>
-            <h2>Weather in: {weather.name}</h2>
-            <h3>{weather.main.temp}°C</h3>
-            <h4>{weather.weather[0].description}</h4>
-          </div>
+          <CardWeather weather={weather} />
         )}
         <hr />
         <div>
@@ -62,46 +44,11 @@ function App() {
             <>
               <h2>Forecast</h2>
               <div className='container'>
-                <div className='card'>
-                  {forecast.list.slice(0, 8).map((item, index) => (
-                    <div key={index} className='inner'> 
-                      <h3>{item.dt_txt}</h3>
-                      <h4>{item.main.temp}°C</h4>
-                    </div>
-                  ))}
-                </div>
-                <div className='card'>
-                  {forecast.list.slice(8, 16).map((item, index) => (
-                    <div key={index} className='inner'> 
-                      <h3>{item.dt_txt}</h3>
-                      <h4>{item.main.temp}°C</h4>
-                    </div>
-                  ))}
-                </div>
-                <div className='card'>
-                  {forecast.list.slice(16, 24).map((item, index) => (
-                    <div key={index} className='inner'> 
-                      <h3>{item.dt_txt}</h3>
-                      <h4>{item.main.temp}°C</h4>
-                    </div>
-                  ))}
-                </div>
-                <div className='card'>
-                  {forecast.list.slice(24, 32).map((item, index) => (
-                    <div key={index} className='inner'> 
-                      <h3>{item.dt_txt}</h3>
-                      <h4>{item.main.temp}°C</h4>
-                    </div>
-                  ))}
-                </div>
-                <div className='card'>
-                  {forecast.list.slice(32, 40).map((item, index) => (
-                    <div key={index} className='inner'> 
-                      <h3>{item.dt_txt}</h3>
-                      <h4>{item.main.temp}°C</h4>
-                    </div>
-                  ))}
-                </div>
+                <CardForecast forecast={forecast} initialValue={0} finalValue={8} />
+                <CardForecast forecast={forecast} initialValue={8} finalValue={16} />
+                <CardForecast forecast={forecast} initialValue={16} finalValue={24} />
+                <CardForecast forecast={forecast} initialValue={24} finalValue={32} />
+                <CardForecast forecast={forecast} initialValue={32} finalValue={40} />
               </div>
             </>
           )}
