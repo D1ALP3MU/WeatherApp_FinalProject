@@ -28,22 +28,33 @@
 
 .card {
   display: flex;
-  flex-direction: column;
+  /* border: 1px solid red; */
+  /* flex-direction: column; */
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   margin: 10px;
   padding: 10px;
+  background: rgba(255, 255, 255, 0.2) ;
+  backdrop-filter: blur(30px);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
+  -ms-border-radius: 10px;  
   -o-border-radius: 10px;
-  background-color: #888;
+  /* background-color: #888; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .inner {
   border: 1px solid #fff;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
 @keyframes logo-spin {
