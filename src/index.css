@@ -51,18 +51,18 @@ button {
   border-radius: 12px;
   width: 120px;
   border: 1px solid transparent;
-  /* padding: 0.4em 1em; */
-  font-size: 1em;
+  /*padding: 0.4em 1em;
+  */font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   background-color: var(--beige-color);
   color: var(--second-text-color);
   cursor: pointer;
-  transition: border-color 0.25s;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  -ms-border-radius: 12px;
-  -o-border-radius: 12px;
+  transition: .3s ease;
+  -webkit-transition: .3s ease;
+  -moz-transition: .3s ease;
+  -ms-transition: .3s ease;
+  -o-transition: .3s ease;
 }
 
 button:hover {

@@ -9,7 +9,7 @@ const CardWeather = ({ weather }) => {
             <div className="weather-box">
                 <div className="box">
                     <div className="info-weather">
-                        <h2>Weather in: {name}</h2>
+                        <h2>Weather in: <br />{name}</h2>
                         <div className="weather">
                             <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} alt="system icon"></img>
                             <p className="temperature">{temp}<span>°C</span></p>

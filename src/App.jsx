@@ -18,17 +18,17 @@ function App() {
   const [forecast, getForecast] = useForecast(null)
 
   console.log(weather);
-  // console.log(forecast);
+  console.log(forecast);
 
   useEffect(() => {
-    if (city) {
-      getForecast(city)
+    if (weather) {
+      getForecast(city, weather)
     }
-  }, [city])
+  }, [weather])
 
   return (
     <div>
-      <h1>My Weather App</h1>
+      <h1>Weather Whiz</h1>
       <div>
         <div className='containerInput'>
           <input 
