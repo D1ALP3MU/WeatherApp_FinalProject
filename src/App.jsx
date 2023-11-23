@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
+import { FaSearchLocation } from "react-icons/fa";
 import useWeather from './hooks/useWeather'
 import useForecast from './hooks/useForecast'
 import CardForecast from './components/CardForecast'
 import CardWeather from './components/CardWeather'
+import GeolocationMap from './components/GeolocationMap'
 import './App.css'
 
 // Componentizar la aplicación (por ejemplo un componente para las tarjetas del pronóstico)
@@ -15,6 +17,9 @@ function App() {
   const [weather, getWeather] = useWeather(null)
   const [forecast, getForecast] = useForecast(null)
 
+  console.log(weather);
+  // console.log(forecast);
+
   useEffect(() => {
     if (city) {
       getForecast(city)
@@ -25,30 +30,35 @@ function App() {
     <div>
       <h1>My Weather App</h1>
       <div>
-        <input 
-          type="text" 
-          placeholder='Enter city name'
-          onBlur={(event) => setCity(event.target.value)} //onBlur es un evento que se ejecuta cuando el usuario sale del input
-        />
-        <button
-          onClick={() => getWeather(city)}
-        >
-          Search
-        </button>
+        <div className='containerInput'>
+          <input 
+            type="text" 
+            placeholder='Enter city name'
+            onBlur={(event) => setCity(event.target.value)} //onBlur es un evento que se ejecuta cuando el usuario sale del input
+          />
+          <button
+            onClick={() => getWeather(city)}
+          >
+            <FaSearchLocation /> Search
+          </button>
+        </div>
         {weather && (
-          <CardWeather weather={weather} />
+          <div className='containerWeather'>
+            <CardWeather weather={weather} />
+            <GeolocationMap weather={weather} />
+          </div>
         )}
-        <hr />
+        <hr className='line-hr'/>
         <div>
           {forecast && (
             <>
-              <h2>Forecast</h2>
-              <div className='container'>
+              <div className='container-forecast'>
+                <h2>Forecast</h2>
                 <CardForecast forecast={forecast} initialValue={0} finalValue={8} />
-                <CardForecast forecast={forecast} initialValue={8} finalValue={16} />
+                {/* <CardForecast forecast={forecast} initialValue={8} finalValue={16} />
                 <CardForecast forecast={forecast} initialValue={16} finalValue={24} />
                 <CardForecast forecast={forecast} initialValue={24} finalValue={32} />
-                <CardForecast forecast={forecast} initialValue={32} finalValue={40} />
+                <CardForecast forecast={forecast} initialValue={32} finalValue={40} /> */}
               </div>
             </>
           )}
