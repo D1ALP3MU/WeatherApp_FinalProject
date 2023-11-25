@@ -14,7 +14,7 @@ const useForecast = (initialState) => {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${name}&appid=${apiKey}&units=metric`)
             .then( response => response.json() )
             .then( data => setForecast(data) )
-            .catch( error => console.log(error) )
+            .catch( error => console.log(error.message) )
     }
 
 

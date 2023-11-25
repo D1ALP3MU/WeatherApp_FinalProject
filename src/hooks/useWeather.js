@@ -42,7 +42,7 @@ const useWeather = (initialState) => {
             }
 
         } catch (error) {
-            alert(error)    
+            console.log(error.message)    
         }
     }
     return [weather, getWeather]

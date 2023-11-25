@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Map, Marker } from "pigeon-maps";
+import { Map, Marker} from "pigeon-maps";
 
 
 const GeolocationMap = ({ weather }) => {
@@ -10,7 +10,7 @@ const GeolocationMap = ({ weather }) => {
     // console.log(weather);
 
     return (
-        <Map width={500} height={300} defaultCenter={[lat, lon]} defaultZoom={11}>
+        <Map width={500} height={300} defaultCenter={[lat, lon]} defaultZoom={12} >
             <Marker 
                 width={50}
                 anchor={[lat, lon]} 
