@@ -10,7 +10,7 @@ const GeolocationMap = ({ weather }) => {
     // console.log(weather);
 
     return (
-        <Map width={500} height={300} defaultCenter={[lat, lon]} defaultZoom={12} >
+        <Map width={500} height={450} center={[lat, lon]} defaultZoom={11} > {/* solo necesitabas cambiar por center y ya */}
             <Marker 
                 width={50}
                 anchor={[lat, lon]} 
