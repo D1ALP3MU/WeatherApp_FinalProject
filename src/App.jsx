@@ -17,12 +17,12 @@ function App() {
   const [weather, getWeather] = useWeather(null)
   const [forecast, getForecast] = useForecast(null)
 
-  console.log(weather);
-  console.log(forecast);
+  // console.log(weather);
+  // console.log(forecast);
 
   useEffect(() => {
     if (weather) {
-      getForecast(city, weather)
+      getForecast(weather)
     }
   }, [weather])
 
@@ -55,10 +55,10 @@ function App() {
               <div className='container-forecast'>
                 <h2>Forecast</h2>
                 <CardForecast forecast={forecast} initialValue={0} finalValue={8} />
-                {/* <CardForecast forecast={forecast} initialValue={8} finalValue={16} />
+                <CardForecast forecast={forecast} initialValue={8} finalValue={16} />
                 <CardForecast forecast={forecast} initialValue={16} finalValue={24} />
                 <CardForecast forecast={forecast} initialValue={24} finalValue={32} />
-                <CardForecast forecast={forecast} initialValue={32} finalValue={40} /> */}
+                <CardForecast forecast={forecast} initialValue={32} finalValue={40} />
               </div>
             </>
           )}

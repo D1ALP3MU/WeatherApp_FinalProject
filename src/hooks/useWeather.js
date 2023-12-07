@@ -11,7 +11,6 @@ const useWeather = (initialState) => {
     
     const getWeather = async (city) => {
         if (city === '') {
-            // console.log('Please write a city to fetch');
             MySwal.fire({
                 title: "Please write a city to fetch",
                 width: 500,
@@ -34,7 +33,7 @@ const useWeather = (initialState) => {
                 });
                 return
             }
-            console.log(weather);
+            // console.log(weather);
             if (city === data.name) {
                 return  
             } else {
@@ -42,25 +41,15 @@ const useWeather = (initialState) => {
             }
 
         } catch (error) {
-            console.log(error.message)    
+            // console.log(error.message);
+            MySwal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.message,
+            });    
         }
     }
     return [weather, getWeather]
 }
 
 export default useWeather
-
-// const apiKey = '80b626b94dc8c81bfd23911396d4e3dd'
-
-// //FUNCION PARA OBTENER EL CLIMA ACTUAL
-// const useWeather = (initialState) => {
-//     const [weather, setWeather] = useState(initialState)
-
-//     const getWeather = (city) => {
-//         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
-//             .then( response => response.json())
-//             .then( data => setWeather(data) )
-//             .catch( error => console.log(error) )
-//     }
-//     return [weather, getWeather]
-// }
